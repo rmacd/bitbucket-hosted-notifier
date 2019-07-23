@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:f="/lib/form" xmlns:c="/lib/credentials">
+
+    <f:section title="${%Hosted Bitbucket Notification}">
+        <f:entry title="${%Credentials}" description="Optional credentials eg client certificate or username/password" field="credentialsId">
+            <c:select />
+        </f:entry>
+        <f:entry field="restEndpoint" title="${%REST path}" description="Path to Bitbucket REST API">
+            <f:textbox/>
+        </f:entry>
+    </f:section>
+</j:jelly>

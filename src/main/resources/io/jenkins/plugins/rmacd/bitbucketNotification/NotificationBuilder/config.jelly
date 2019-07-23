@@ -1,0 +1,11 @@
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+    <f:entry name="${%Action}" title="${%ActionTitle}" field="action">
+        <select name="action">
+            <option value="INPROGRESS">Started</option>
+            <option value="FAILED">Failed</option>
+            <option value="SUCCESSFUL">Successful</option>
+        </select>
+    </f:entry>
+</j:jelly>
+
