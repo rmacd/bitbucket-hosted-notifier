@@ -30,10 +30,12 @@ public class NotificationConfiguration extends GlobalConfiguration {
 
     private String restEndpoint;
     private String credentialsId;
+    private NotificationUtils notificationUtils;
 
     public NotificationConfiguration() {
         // When Jenkins is restarted, load any saved configuration from disk.
         load();
+        notificationUtils = new NotificationUtils();
     }
 
     public String getRestEndpoint() {
@@ -65,7 +67,7 @@ public class NotificationConfiguration extends GlobalConfiguration {
             return FormValidation.warning("Please specify a REST endpoint.");
         }
         try {
-            if (NotificationUtils.getURL(endpointURL) == 200) {
+            if (notificationUtils.getURL(endpointURL) == 200) {
                 return FormValidation.ok();
             }
             else {
