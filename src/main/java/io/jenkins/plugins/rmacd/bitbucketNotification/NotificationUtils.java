@@ -109,7 +109,7 @@ public class NotificationUtils {
                             && ((StandardCredentials) credential).getId().equalsIgnoreCase(credentialsId)) {
                         UsernamePasswordCredentials entry = (UsernamePasswordCredentials) credential;
                         logger.println(
-                            String.format("Got credentials: %s:%s", entry.getUsername(), entry.getPassword().getPlainText())
+                            String.format("Got credentials: %s:********", entry.getUsername())
                         );
                         conn.setRequestProperty("Authorization", String.format(
                                 "Basic %s", new String(Base64.getEncoder().encode(String.format("%s:%s", entry.getUsername(), entry.getPassword()).getBytes()))

@@ -1,4 +1,4 @@
 <?jelly escape-by-default='true'?>
 <div>
-    TODO
+    Enables passing notifications to a privately hosted instance of Bitbucket
 </div>

@@ -3,7 +3,10 @@ package io.jenkins.plugins.rmacd.bitbucketNotification;
 import hudson.Extension;
 import hudson.FilePath;
 import hudson.Launcher;
-import hudson.model.*;
+import hudson.model.AbstractBuild;
+import hudson.model.AbstractProject;
+import hudson.model.Run;
+import hudson.model.TaskListener;
 import hudson.tasks.BuildStepDescriptor;
 import hudson.tasks.Builder;
 import io.jenkins.plugins.rmacd.bitbucketNotification.models.NotificationModel;
@@ -32,7 +35,7 @@ public class NotificationBuilder extends Builder implements SimpleBuildStep {
             throw new NotificationRuntimeException("Invalid action");
         }
         this.action = action;
-        this.notificationUtils = null;
+        this.notificationUtils = new NotificationUtils();
     }
 
     public String getAction() {
@@ -69,7 +72,6 @@ public class NotificationBuilder extends Builder implements SimpleBuildStep {
 
         NotificationConfiguration config = NotificationConfiguration.get();
         taskListener.getLogger().println("Got rest endpoint " + config.getRestEndpoint() + "/" + commitID);
-        taskListener.getLogger().println("Got credentials ID " + config.getCredentialsId());
 
         Map<String, String> buildvars = ((AbstractBuild) run).getBuildVariables();
         for (Iterator<String> iterator = buildvars.keySet().iterator(); iterator.hasNext(); ) {
@@ -88,13 +90,13 @@ public class NotificationBuilder extends Builder implements SimpleBuildStep {
     public static class Descriptor extends BuildStepDescriptor<Builder> {
         @Override
         public boolean isApplicable(Class<? extends AbstractProject> jobType) {
-            return FreeStyleProject.class.isAssignableFrom(jobType);
+            return true;
         }
 
         @Nonnull
         @Override
         public String getDisplayName() {
-            return "Notify hosted Bitbucket instance";
+            return "Notify private Bitbucket instance";
         }
     }
 }
